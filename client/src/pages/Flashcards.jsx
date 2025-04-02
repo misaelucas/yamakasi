@@ -34,11 +34,14 @@ export default function Flashcards() {
     setLoading(true)
 
     try {
-      const res = await fetch('http://localhost:5000/api/generate', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ prompt: topic }),
-      })
+      const res = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/api/generate`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ prompt: topic }),
+        }
+      )
 
       const data = await res.json()
       setCards(data.cards || [])
